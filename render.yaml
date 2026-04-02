@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: hamo-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./library-management/Dockerfile
+    dockerContext: ./library-management
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: APP_JWT_SECRET
+        generateValue: true
+      - key: APP_CORS_ALLOWED_ORIGIN_PATTERNS
+        sync: false
+      - key: APP_OPENAI_API_KEY
+        sync: false
+      - key: SPRING_H2_CONSOLE_ENABLED
+        value: false

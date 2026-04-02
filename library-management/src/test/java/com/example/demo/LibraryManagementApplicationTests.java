@@ -29,6 +29,14 @@ class LibraryManagementApplicationTests {
     }
 
     @Test
+    void healthEndpointReportsUpAfterInitialization() throws Exception {
+        mockMvc.perform(get("/api/health"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("UP"))
+                .andExpect(jsonPath("$.service").value("hamo-api"));
+    }
+
+    @Test
     void loginReturnsToken() throws Exception {
         mockMvc.perform(post("/api/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -45,9 +53,11 @@ class LibraryManagementApplicationTests {
     }
 
     @Test
-    void booksEndpointIsPublic() throws Exception {
+    void booksEndpointIsPublicAndSeeded() throws Exception {
         mockMvc.perform(get("/api/books"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").isNumber())
+                .andExpect(jsonPath("$[0].title").isNotEmpty());
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.model.Book;
@@ -49,9 +51,10 @@ public class DataInitializer {
     CommandLineRunner seedData(UserRepository userRepository, BookRepository bookRepository,
             MemberRepository memberRepository, IssueRepository issueRepository,
             PaymentRecordRepository paymentRecordRepository, ReservationRepository reservationRepository,
-            PasswordEncoder passwordEncoder,
+            PasswordEncoder passwordEncoder, DataSeedStatus dataSeedStatus,
             @Value("${app.mock-data.enabled:true}") boolean mockDataEnabled,
             @Value("${app.mock-data.csv-path:}") String csvPath,
+            @Value("${app.mock-data.classpath-csv:seed/sample-books.csv}") String classpathCsvPath,
             @Value("${app.mock-data.max-books:1000}") int maxBooks,
             @Value("${app.mock-data.mock-members:12}") int mockMembers) {
         return args -> {
@@ -59,7 +62,9 @@ public class DataInitializer {
             seedMembers(memberRepository, userRepository, passwordEncoder, mockMembers);
 
             if (bookRepository.count() == 0) {
-                boolean loadedFromCsv = mockDataEnabled && loadBooksFromCsv(bookRepository, csvPath, maxBooks);
+                boolean loadedFromCsv = mockDataEnabled
+                        && (loadBooksFromCsv(bookRepository, csvPath, maxBooks)
+                                || loadBooksFromClasspathCsv(bookRepository, classpathCsvPath, maxBooks));
                 if (!loadedFromCsv) {
                     seedFallbackBooks(bookRepository);
                 }
@@ -69,6 +74,7 @@ public class DataInitializer {
             seedIssuesAndPayments(bookRepository, memberRepository, issueRepository, paymentRecordRepository);
             releaseLegacySeedReservations(bookRepository, reservationRepository);
             seedReservations(bookRepository, memberRepository, reservationRepository);
+            dataSeedStatus.markComplete();
         };
     }
 
@@ -152,9 +158,33 @@ public class DataInitializer {
             return false;
         }
 
+        try (Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+            return loadBooksFromReader(bookRepository, reader, maxBooks);
+        } catch (IOException exception) {
+            return false;
+        }
+    }
+
+    private boolean loadBooksFromClasspathCsv(BookRepository bookRepository, String classpathCsvPath, int maxBooks) {
+        if (classpathCsvPath == null || classpathCsvPath.isBlank()) {
+            return false;
+        }
+
+        ClassPathResource resource = new ClassPathResource(classpathCsvPath);
+        if (!resource.exists()) {
+            return false;
+        }
+
+        try (Reader reader = new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8)) {
+            return loadBooksFromReader(bookRepository, reader, maxBooks);
+        } catch (IOException exception) {
+            return false;
+        }
+    }
+
+    private boolean loadBooksFromReader(BookRepository bookRepository, Reader reader, int maxBooks) throws IOException {
         List<Book> books = new ArrayList<>();
-        try (Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-                CSVParser parser = CSVFormat.DEFAULT.builder().setHeader().setSkipHeaderRecord(true).get().parse(reader)) {
+        try (CSVParser parser = CSVFormat.DEFAULT.builder().setHeader().setSkipHeaderRecord(true).get().parse(reader)) {
             int count = 0;
             for (CSVRecord record : parser) {
                 if (count >= maxBooks) {
@@ -166,13 +196,12 @@ public class DataInitializer {
                     count++;
                 }
             }
-        } catch (IOException exception) {
-            return false;
         }
 
         if (books.isEmpty()) {
             return false;
         }
+
         bookRepository.saveAll(books);
         return true;
     }
@@ -223,7 +252,7 @@ public class DataInitializer {
                         BigDecimal.valueOf(350), "habits,productivity,motivation",
                         buildCoverUrl("9781847941831")),
                 new Book("Deep Work", "Cal Newport", "9781455586691", "Productivity",
-                        "Focused success in a distracted world", "English", 2016, 5, 4.6,
+                        "Strategies for focused work in a distracted world", "English", 2016, 5, 4.6,
                         BigDecimal.valueOf(400), "focus,productivity,career",
                         buildCoverUrl("9781455586691"))));
     }
@@ -265,7 +294,7 @@ public class DataInitializer {
             issue.setBook(book);
             issue.setMember(member);
             issue.setIssueDate(LocalDate.now().minusDays(20L - index));
-            issue.setDueDate(issue.getIssueDate().plusDays(14));
+            issue.setDueDate(issue.getIssueDate().plusDays(7));
             issue.setNotes("Mock seeded issue record");
 
             if (index % 4 == 0) {
@@ -276,7 +305,7 @@ public class DataInitializer {
             } else if (index % 4 == 1) {
                 issue.setReturnDate(LocalDate.now().minusDays(2));
                 issue.setStatus(IssueStatus.OVERDUE);
-                issue.setFineAmount(BigDecimal.valueOf(40));
+                issue.setFineAmount(BigDecimal.valueOf(30));
                 issue.setFinePaid(false);
             } else if (index % 4 == 2) {
                 issue.setStatus(IssueStatus.ISSUED);
@@ -284,7 +313,7 @@ public class DataInitializer {
                 issue.setFinePaid(true);
             } else {
                 issue.setStatus(IssueStatus.OVERDUE);
-                issue.setFineAmount(BigDecimal.valueOf(70));
+                issue.setFineAmount(BigDecimal.valueOf(60));
                 issue.setFinePaid(false);
             }
 
@@ -303,7 +332,7 @@ public class DataInitializer {
                 PaymentRecord payment = new PaymentRecord();
                 payment.setIssueRecord(issue);
                 payment.setAmount(issue.getFineAmount());
-                payment.setGateway("RAZORPAY");
+                payment.setGateway("SIMULATED_RAZORPAY");
                 payment.setGatewayOrderId("seed-order-" + issue.getId());
                 payment.setGatewayPaymentId("seed-payment-" + issue.getId());
                 payment.setRedirectUrl("https://payments.library.local/payments/" + issue.getId());
@@ -354,12 +383,12 @@ public class DataInitializer {
 
         List<Book> books = bookRepository.findAll();
         List<Member> members = memberRepository.findAll().stream().filter(Member::isActive).toList();
-        if (books.size() < 30 || members.size() < 4) {
+        if (books.size() < 8 || members.size() < 4) {
             return;
         }
 
-        Book reservedBook = books.get(24);
-        Book waitlistedBook = books.get(25);
+        Book reservedBook = books.get(Math.min(5, books.size() - 1));
+        Book waitlistedBook = books.get(Math.min(6, books.size() - 1));
 
         ReservationRecord reserved = new ReservationRecord();
         reserved.setBook(reservedBook);
@@ -443,8 +472,9 @@ public class DataInitializer {
         if (value == null || value.isBlank()) {
             return "";
         }
-        return value.replace("SociÃ©tÃ©", "Societe").trim();
+        return value.trim();
     }
+
     private String limit(String value, int maxLength) {
         if (value == null) {
             return "";

@@ -1,0 +1,7 @@
+target/
+data/
+.git/
+.classpath
+.factorypath
+.project
+.settings/
