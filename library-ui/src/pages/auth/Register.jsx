@@ -89,7 +89,7 @@ export function Register() {
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              placeholder="Jane Doe"
+              placeholder="Enter your full name"
               required
             />
             <Input
@@ -98,7 +98,7 @@ export function Register() {
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              placeholder="member@university.edu"
+              placeholder="Enter your email"
               required
             />
             <Input
@@ -126,7 +126,7 @@ export function Register() {
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
-              placeholder="9999999999"
+              placeholder="Enter your phone number"
               required
             />
             <Input
@@ -135,7 +135,7 @@ export function Register() {
               name="department"
               value={formData.department}
               onChange={handleInputChange}
-              placeholder="Computer Science"
+              placeholder="Enter your department"
               required
             />
             

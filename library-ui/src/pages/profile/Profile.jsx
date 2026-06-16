@@ -171,7 +171,7 @@ export function Profile() {
                 name="name"
                 value={profile.name}
                 onChange={handleChange}
-                placeholder="Mohith Chamakuri"
+                placeholder="Enter your full name"
                 required
               />
               <Input
@@ -187,14 +187,14 @@ export function Profile() {
                 type="tel"
                 value={profile.phone}
                 onChange={handleChange}
-                placeholder="9999999999"
+                placeholder="Enter your phone number"
               />
               <Input
                 label="Department"
                 name="department"
                 value={profile.department}
                 onChange={handleChange}
-                placeholder="Computer Science"
+                placeholder="Enter your department"
               />
 
               <div className={styles.actions}>
