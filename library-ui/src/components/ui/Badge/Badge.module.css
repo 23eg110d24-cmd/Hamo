@@ -1,51 +1,64 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.125rem 0.625rem;
-  font-size: 0.75rem;
-  font-weight: 500;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.725rem;
+  font-weight: 700;
   border-radius: 9999px;
   text-transform: uppercase;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.05em;
   white-space: nowrap;
+  
+  /* Raised 3D Wax-Seal / Leather Embossed Shadow */
+  box-shadow: 
+    0 2px 4px rgba(35, 29, 25, 0.18),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.2);
+    
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .default {
-  background-color: var(--bg-surface-hover);
+  background: linear-gradient(135deg, var(--bg-surface-hover) 0%, var(--bg-recessed) 100%);
   color: var(--text-main);
-  border: 1px solid var(--border-color);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-color: var(--border-color);
 }
 
 .primary {
-  background-color: var(--primary-red-light);
-  color: var(--primary-red);
-  border: 1px solid rgba(230, 35, 20, 0.3);
+  background: linear-gradient(135deg, #e74c3c 0%, var(--primary-red) 100%);
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
 .success {
-  background-color: rgba(31, 167, 86, 0.1);
-  color: var(--success);
-  border: 1px solid rgba(31, 167, 86, 0.3);
+  background: linear-gradient(135deg, #2ecc71 0%, #19803f 100%);
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
 .warning {
-  background-color: rgba(245, 166, 35, 0.1);
-  color: var(--warning);
-  border: 1px solid rgba(245, 166, 35, 0.3);
+  background: linear-gradient(135deg, #f1c40f 0%, #b37400 100%);
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .error, .danger {
-  background-color: rgba(230, 35, 20, 0.1);
-  color: var(--error);
-  border: 1px solid rgba(230, 35, 20, 0.3);
+  background: linear-gradient(135deg, #e74c3c 0%, var(--error) 100%);
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
-[data-theme='dark'] .success {
-  background-color: rgba(46, 205, 111, 0.15);
-  border: 1px solid rgba(46, 205, 111, 0.3);
+[data-theme='dark'] .default {
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-recessed) 100%);
+  color: var(--text-main);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  border-color: var(--border-color);
 }
 
-[data-theme='dark'] .warning {
-  background-color: rgba(251, 192, 45, 0.15);
-  border: 1px solid rgba(251, 192, 45, 0.3);
+[data-theme='dark'] .badge {
+  box-shadow: 
+    0 2px 5px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.3);
 }

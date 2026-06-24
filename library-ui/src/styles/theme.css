@@ -1,76 +1,83 @@
 :root {
-  /* Colors - Light Theme */
-  --bg-main: #ffffff;
-  --bg-surface: #f7f7f7;
-  --bg-surface-hover: #ebebeb;
-  --bg-raised: #ffffff;
-  --bg-recessed: #ececec;
-  --glass-surface: rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(255, 255, 255, 0.68);
+  /* Colors - Light Theme (Warm Parchment & Mahogany) */
+  --bg-main: #fcf7ef; /* Warm, aged parchment paper */
+  --bg-surface: #f4eae1; /* Soft desk-mat tan */
+  --bg-surface-hover: #e8dccf; /* Slightly darker pressed leather-tan */
+  --bg-raised: #ffffff; /* Pure paper sheet */
+  --bg-recessed: #ebdcd0; /* Recessed wood-groove */
+  --glass-surface: rgba(252, 247, 239, 0.78);
+  --glass-border: rgba(212, 175, 55, 0.35); /* Soft gold border */
   
-  --text-main: #0a0a0a;
-  --text-muted: #666666;
+  --text-main: #231d19; /* Soft ink black */
+  --text-muted: #6e6156; /* Faded sepia text */
   
-  --border-color: #e5e5e5;
+  --border-color: #d1bfab; /* Warm leather-seam borders */
+  --border-gold: #c5a028; /* Embossed gold leaf trim */
   
-  /* Primary Brand - Red */
-  --primary-red: #e62314;
-  --primary-red-hover: #c41c0f;
-  --primary-red-light: #ffece5;
+  /* Primary Brand - Crimson Book Binder Red */
+  --primary-red: #9e1c14;
+  --primary-red-hover: #7d130d;
+  --primary-red-light: rgba(158, 28, 20, 0.08);
 
   /* Utility Colors */
-  --success: #1fa756;
-  --warning: #f5a623;
-  --error: #e62314;
+  --success: #19803f;
+  --warning: #cc8200;
+  --error: #9e1c14;
   
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  --shadow-md: 0 10px 22px rgba(15, 15, 15, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.88);
-  --shadow-lg: 0 22px 48px rgba(15, 15, 15, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  --shadow-inset: inset 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 -1px 0 rgba(255, 255, 255, 0.76);
+  /* Skeuomorphic 3D Shadows */
+  /* Specs: Outward drop-shadow + Inset top specular light highlight + Bevel edge outline */
+  --shadow-sm: 0 2px 3px rgba(35, 29, 25, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.15);
+  --shadow-md: 0 8px 18px rgba(35, 29, 25, 0.12), 0 2px 4px rgba(35, 29, 25, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 0 0 1px rgba(212, 175, 55, 0.22);
+  --shadow-lg: 0 20px 38px rgba(35, 29, 25, 0.18), 0 4px 10px rgba(35, 29, 25, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 0 0 1px rgba(212, 175, 55, 0.3);
+  
+  /* Pressed-in groove / engraved slot shadow */
+  --shadow-inset: inset 0 3px 6px rgba(35, 29, 25, 0.18), inset 0 1px 2px rgba(35, 29, 25, 0.12), 0 1px 0 rgba(255, 255, 255, 0.8);
   
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   
-  /* Radii */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
+  /* Radii (Skeuomorphism uses slightly rounder, organic shapes for leather/book aesthetics) */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 
   /* Transitions */
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s ease;
+  --transition-fast: 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme='dark'] {
-  /* Colors - Dark Theme */
-  --bg-main: #0a0a0a;
-  --bg-surface: #171717;
-  --bg-surface-hover: #262626;
-  --bg-raised: #1d1d1d;
-  --bg-recessed: #101010;
-  --glass-surface: rgba(24, 24, 24, 0.68);
-  --glass-border: rgba(255, 255, 255, 0.13);
+  /* Colors - Dark Theme (Espresso Leather & Polished Brass) */
+  --bg-main: #141110; /* Rich espresso leather */
+  --bg-surface: #1d1a19; /* Dark textured mahogany panels */
+  --bg-surface-hover: #272322; /* Lighter mahogany wood hover */
+  --bg-raised: #201d1c; /* Heavy slate board */
+  --bg-recessed: #0c0a0a; /* Engraved deep shadow slots */
+  --glass-surface: rgba(20, 17, 16, 0.82);
+  --glass-border: rgba(230, 195, 103, 0.16);
   
-  --text-main: #ffffff;
-  --text-muted: #a3a3a3;
+  --text-main: #f0e6d2; /* Soft gold leaf ivory */
+  --text-muted: #9e9180; /* Muted antique brass */
   
-  --border-color: #333333;
+  --border-color: #2f2a28; /* Dark stitching seams */
+  --border-gold: #8f753c; /* Aged brass border */
   
-  /* Primary Brand - Red (Using slightly brighter red for better contrast in dark mode, but keeping it bold) */
-  --primary-red: #f03e2f;
-  --primary-red-hover: #ff5747;
-  --primary-red-light: rgba(240, 62, 47, 0.15);
+  /* Primary Brand - Dark Velvet Crimson */
+  --primary-red: #8c1913;
+  --primary-red-hover: #ad251c;
+  --primary-red-light: rgba(140, 25, 19, 0.22);
   
   /* Utility Colors */
-  --success: #2ecd6f;
-  --warning: #fbc02d;
-  --error: #f03e2f;
+  --success: #209951;
+  --warning: #e6a100;
+  --error: #8c1913;
   
-  /* Shadows */
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.44), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  --shadow-md: 0 12px 26px rgba(0, 0, 0, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.07);
-  --shadow-lg: 0 26px 56px rgba(0, 0, 0, 0.62), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  --shadow-inset: inset 0 2px 8px rgba(0, 0, 0, 0.45), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  /* Skeuomorphic 3D Shadows - Dark Mode (Deep and dramatic) */
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 0 1px rgba(230, 195, 103, 0.08);
+  --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.65), 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 0 0 1px rgba(230, 195, 103, 0.12);
+  --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.72), 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.09), 0 0 0 1px rgba(230, 195, 103, 0.18);
+  
+  /* Deeply engraved recess for dark mode */
+  --shadow-inset: inset 0 3px 8px rgba(0, 0, 0, 0.75), inset 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05);
 }

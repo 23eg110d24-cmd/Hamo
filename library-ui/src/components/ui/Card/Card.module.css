@@ -1,28 +1,68 @@
 .card {
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--bg-raised) 96%, white 4%) 0%, var(--bg-main) 100%);
-  border: 1px solid color-mix(in srgb, var(--border-color) 82%, white 18%);
+  background: linear-gradient(180deg, var(--bg-raised) 0%, var(--bg-main) 100%);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  
+  /* Double Border: Outer shadow, inner gold-leaf foil ring, top specular highlight */
+  box-shadow: 
+    var(--shadow-sm), 
+    inset 0 0 0 1.5px var(--border-gold),
+    inset 0 2.5px 0 rgba(255, 255, 255, 0.4);
+    
   overflow: hidden;
   transition: box-shadow var(--transition-normal), border-color var(--transition-normal), transform var(--transition-normal);
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+[data-theme='dark'] .card {
+  box-shadow: 
+    var(--shadow-sm), 
+    inset 0 0 0 1.5px rgba(230, 195, 103, 0.18),
+    inset 0 2px 0 rgba(255, 255, 255, 0.08);
+}
+
+.hoverable {
+  cursor: pointer;
 }
 
 .hoverable:hover {
-  box-shadow: var(--shadow-md);
-  border-color: color-mix(in srgb, var(--primary-red) 34%, var(--border-color));
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  border-color: var(--border-gold);
+  box-shadow: 
+    var(--shadow-lg), 
+    inset 0 0 0 2.5px var(--border-gold),
+    inset 0 3px 0 rgba(255, 255, 255, 0.5);
+}
+
+[data-theme='dark'] .hoverable:hover {
+  box-shadow: 
+    var(--shadow-lg), 
+    inset 0 0 0 2.5px rgba(230, 195, 103, 0.38),
+    inset 0 3px 0 rgba(255, 255, 255, 0.1);
 }
 
 .header {
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1.5px solid var(--border-color);
+  background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-surface-hover) 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(180deg, rgba(255,255,255,0.22), transparent);
+  position: relative;
+}
+
+/* Subtle brass separator divider line */
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-gold);
+  opacity: 0.5;
 }
 
 .headerContent {
@@ -32,16 +72,18 @@
 
 .title {
   margin: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--text-main);
+  letter-spacing: -0.01em;
 }
 
 .subtitle {
   margin: 0;
-  margin-top: 0.25rem;
+  margin-top: 0.325rem;
   font-size: 0.875rem;
   color: var(--text-muted);
+  font-style: italic;
 }
 
 .action {
@@ -52,14 +94,27 @@
 .body {
   padding: 1.5rem;
   flex-grow: 1;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02), transparent), var(--bg-main);
 }
 
 .footer {
   padding: 1.25rem 1.5rem;
-  border-top: 1px solid var(--border-color);
-  background: linear-gradient(180deg, var(--bg-surface), var(--bg-recessed));
+  border-top: 1.5px solid var(--border-color);
+  background: linear-gradient(180deg, var(--bg-surface-hover), var(--bg-surface));
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
   align-items: center;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-gold);
+  opacity: 0.4;
 }
