@@ -63,10 +63,10 @@
   --border-color: #2f2a28; /* Dark stitching seams */
   --border-gold: #8f753c; /* Aged brass border */
   
-  /* Primary Brand - Dark Velvet Crimson */
-  --primary-red: #8c1913;
-  --primary-red-hover: #ad251c;
-  --primary-red-light: rgba(140, 25, 19, 0.22);
+  /* Primary Brand - Vibrant Crimson/Gold contrast */
+  --primary-red: #ff5c4c; /* Bright, readable velvet red */
+  --primary-red-hover: #ff7d70;
+  --primary-red-light: rgba(255, 92, 76, 0.15);
   
   /* Utility Colors */
   --success: #209951;
