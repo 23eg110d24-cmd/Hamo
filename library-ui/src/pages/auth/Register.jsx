@@ -109,7 +109,7 @@ export function Register() {
               onChange={handleInputChange}
               placeholder="••••••••"
               required
-              minLength={6}
+              minLength={8}
             />
             <Input
               label="Confirm Password"

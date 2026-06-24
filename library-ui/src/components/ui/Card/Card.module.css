@@ -1,17 +1,19 @@
 .card {
-  background-color: var(--bg-main);
-  border: 1px solid var(--border-color);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-raised) 96%, white 4%) 0%, var(--bg-main) 100%);
+  border: 1px solid color-mix(in srgb, var(--border-color) 82%, white 18%);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal), transform var(--transition-normal);
   display: flex;
   flex-direction: column;
 }
 
 .hoverable:hover {
   box-shadow: var(--shadow-md);
-  border-color: var(--text-muted);
+  border-color: color-mix(in srgb, var(--primary-red) 34%, var(--border-color));
+  transform: translateY(-2px);
 }
 
 .header {
@@ -20,10 +22,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.22), transparent);
 }
 
 .headerContent {
   flex-grow: 1;
+  min-width: 0;
 }
 
 .title {
@@ -42,6 +46,7 @@
 
 .action {
   margin-left: 1rem;
+  flex-shrink: 0;
 }
 
 .body {
@@ -52,7 +57,7 @@
 .footer {
   padding: 1.25rem 1.5rem;
   border-top: 1px solid var(--border-color);
-  background-color: var(--bg-surface);
+  background: linear-gradient(180deg, var(--bg-surface), var(--bg-recessed));
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;

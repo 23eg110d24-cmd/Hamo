@@ -164,12 +164,12 @@ export function MemberDashboard() {
       </div>
 
       <div className={styles.sideColumn}>
-        <Card>
+        <Card className={styles.glassCard}>
           <Card.Header title="AI Reading Insight" subtitle="Generated from your borrowing patterns" />
           <Card.Body>
             {readingInsights ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
+              <div className={styles.insightStack}>
+                <div className={styles.insightTopline}>
                   <Badge variant="primary">{readingInsights.readingPersona}</Badge>
                   <div className={styles.itemSub} style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                     <Sparkles size={14} color="var(--primary-red)" />
@@ -184,7 +184,7 @@ export function MemberDashboard() {
                     <Badge key={focusArea} variant="default">{focusArea}</Badge>
                   ))}
                 </div>
-                <div style={{ padding: '0.85rem', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', background: 'var(--bg-surface-hover)' }}>
+                <div className={styles.glassPanel}>
                   <div className={styles.itemTitle} style={{ fontSize: '0.9rem', marginBottom: '0.35rem' }}>Next Best Action</div>
                   <div className={styles.itemSub}>{readingInsights.nextAction}</div>
                 </div>
@@ -199,7 +199,7 @@ export function MemberDashboard() {
           </Card.Body>
         </Card>
 
-        <Card hoverable>
+        <Card className={styles.glassCard} hoverable>
           <Card.Header title="AI Recommended" subtitle="Based on your read history" />
           <Card.Body>
              {recommendations.length === 0 ? (

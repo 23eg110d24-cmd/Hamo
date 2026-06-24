@@ -1,7 +1,7 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .pageHeader {
@@ -38,9 +38,10 @@
 
 .statCard {
   padding: 1.25rem;
-  background: linear-gradient(180deg, var(--bg-main) 0%, var(--bg-surface) 100%);
-  border: 1px solid var(--border-color);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--bg-raised) 96%, white 4%) 0%, var(--bg-surface) 100%);
+  border: 1px solid color-mix(in srgb, var(--border-color) 84%, white 16%);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .statLabel {
@@ -67,7 +68,7 @@
 
 .contentGrid {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 @media (min-width: 1100px) {
@@ -81,7 +82,7 @@
 .sideColumn {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .toolbar {
@@ -98,9 +99,10 @@
   padding: 0.75rem 0.9rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
-  background: var(--bg-main);
+  background: linear-gradient(180deg, var(--bg-recessed), var(--bg-main));
   color: var(--text-main);
   font: inherit;
+  box-shadow: var(--shadow-inset);
 }
 
 .searchField {
@@ -252,7 +254,7 @@
   padding: 0.55rem 0.9rem;
   border-radius: 999px;
   border: 1px solid var(--border-color);
-  background: var(--bg-main);
+  background: linear-gradient(180deg, var(--bg-recessed), var(--bg-main));
   color: var(--text-muted);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -264,7 +266,7 @@
 }
 
 .activeTab {
-  background: var(--primary-red-light);
+  background: linear-gradient(180deg, var(--primary-red-light), color-mix(in srgb, var(--primary-red-light) 65%, var(--bg-main) 35%));
   border-color: rgba(230, 35, 20, 0.35);
   color: var(--primary-red);
 }

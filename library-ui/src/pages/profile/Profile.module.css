@@ -12,9 +12,8 @@
   padding: 1.5rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
-  background:
-    radial-gradient(circle at top right, var(--primary-red-light), transparent 40%),
-    linear-gradient(135deg, var(--bg-main), var(--bg-surface));
+  background: linear-gradient(135deg, var(--bg-raised), var(--bg-surface));
+  box-shadow: var(--shadow-sm);
 }
 
 .title {

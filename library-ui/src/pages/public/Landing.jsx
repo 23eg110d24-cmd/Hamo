@@ -53,7 +53,7 @@ export function Landing() {
             <div className={styles.iconWrapper}>
               <CreditCard size={28} />
             </div>
-            <h3 className={styles.featureTitle}>Seamless Payment</h3>
+            <h3 className={styles.featureTitle}>Fast Fine Payments</h3>
             <p className={styles.featureDesc}>
               Manage and clear late fines instantly using our integrated, swift digital checkout experience.
             </p>

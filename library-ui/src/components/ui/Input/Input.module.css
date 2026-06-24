@@ -21,9 +21,10 @@
   font-size: 1rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  background-color: var(--bg-main);
+  background: linear-gradient(180deg, var(--bg-recessed), var(--bg-main));
   color: var(--text-main);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-inset);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
 }
 
 .input::placeholder {
@@ -33,10 +34,11 @@
 .input:focus {
   outline: none;
   border-color: var(--primary-red);
-  box-shadow: 0 0 0 3px var(--primary-red-light);
+  box-shadow: 0 0 0 3px var(--primary-red-light), var(--shadow-inset);
 }
 
-.input:disabled {
+.input:disabled,
+.input:read-only {
   background-color: var(--bg-surface);
   color: var(--text-muted);
   cursor: not-allowed;
@@ -48,7 +50,7 @@
 
 .inputError:focus {
   border-color: var(--error);
-  box-shadow: 0 0 0 3px rgba(230, 35, 20, 0.15);
+  box-shadow: 0 0 0 3px rgba(230, 35, 20, 0.15), var(--shadow-inset);
 }
 
 .errorMessage {
